@@ -1,22 +1,24 @@
 OpenBMC power supply firmware
 
-This directory contains P11 power supply firmware images supplied by the
-vendors. Each PSU firmware should reside in a directory named as the PSU CCIN.
-The firmware image file prefix should be replaced with IBM PSU CCIN and postfix
-must remain as is. The PSU CCIN dir should contains the firmware file and
-MANIFEST file. The contents of CCIN dir can be generated in 2 ways:
+This directory contains power supply firmware images provided by vendors.
+Each PSU firmware should be stored in a directory named after the PSU
+model. The prefix of the firmware image file should be replaced with PSU
+model, while the postfix should remain unchanged. The PSU model directory
+should contain the firmware image and MANIFEST file. The contents of the
+PSU model directory can be generated as follows:
 
-* - Use tool to Generate Tarball with PSU image and MANIFEST Script, the
-    tool located at phosphor-psu-code-mgmt/tools/generate-psu-tar then extract
-    the tarball into the PSU CCIN dir.
+* - Use the tool at phosphor-psu-code-mgmt/tools/generate-psu-tar to generate
+    a tarball containing the PSU firmware image and MANIFEST file. Then extract
+    the tarball into the PSU model directory.
 OR 
 
-* - Add firmware file to PSU CCIN Dir and create file with the following
-    contents:
+* - Add firmware file to PSU model directory and create MANIFEST file with contents
+    similar to the following:
+    
     purpose=xyz.openbmc_project.Software.Version.VersionPurpose.PSU
     version=003000390031
     extended_version=model=2B1E,manufacturer=
 
-Note: Files don't exist in this directory will require addition in
+Note: Adding new files to this repo will require change in
       openbmc/meta-phosphor/recipes-phosphor/power/device-images.bb
-
+      to include the new FWR files into openbmc image.
